@@ -17,6 +17,7 @@
   "dependencies": {
     "better-sqlite3": "^12.4.1",
     "dotenv": "^17.2.3",
+    "node-cache": "^5.1.2",
     "node-fetch": "^2.7.0"
   }
 }
