@@ -1,0 +1,494 @@
+/* Variables CSS pour un thème sombre et minimaliste */
+:root {
+    --color-bg-main: #1e1e1e; /* Fond principal sombre */
+    --color-bg-sidebar: #252526; /* Barre latérale légèrement plus claire */
+    --color-bg-hover: #3c3c3c; /* Survol des éléments */
+    --color-text-main: #f0f0f0; /* Texte clair */
+    --color-text-secondary: #999; /* Texte secondaire/métadonnées */
+    --color-primary: #007acc; /* Couleur d'accentuation (bleu VS Code) */
+    --color-border: #333;
+}
+
+/* ---------------------------------------------------- */
+/* BASE & LAYOUT */
+/* ---------------------------------------------------- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: var(--color-bg-main);
+    color: var(--color-text-main);
+    font-size: 14px;
+    overflow: hidden; /* Empêche les barres de défilement du body */
+}
+
+.app-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* ---------------------------------------------------- */
+/* SIDEBAR (HISTORIQUE) */
+/* ---------------------------------------------------- */
+.sidebar {
+    width: 350px;
+    background-color: var(--color-bg-sidebar);
+    border-right: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.sidebar .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.sidebar h2 {
+    font-size: 1.4em;
+    font-weight: 300;
+    color: var(--color-primary);
+}
+
+.settings-btn {
+    background: none;
+    border: none;
+    color: var(--color-text-secondary);
+    font-size: 1.2em;
+    cursor: pointer;
+    padding: 5px;
+    transition: color 0.2s;
+}
+
+.settings-btn:hover {
+    color: var(--color-text-main);
+}
+
+/* Barre de recherche */
+.search-box {
+    display: flex;
+    align-items: center;
+    padding: 8px 10px;
+    background-color: var(--color-bg-main);
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.search-box i {
+    color: var(--color-text-secondary);
+    margin-right: 10px;
+}
+
+#search-input {
+    flex-grow: 1;
+    border: none;
+    background: none;
+    color: var(--color-text-main);
+    outline: none;
+    font-size: 1em;
+}
+
+/* Liste des Clips */
+.clip-list {
+    flex-grow: 1;
+    overflow-y: auto; /* Scroll pour la liste */
+    padding-right: 5px; /* Espace pour la barre de défilement */
+}
+
+.clip-item {
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border: 1px solid transparent;
+}
+
+.clip-item:hover {
+    background-color: var(--color-bg-hover);
+}
+
+.clip-item.active {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: white;
+}
+
+.clip-item.active .clip-meta {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.clip-text-preview {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.clip-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8em;
+    color: var(--color-text-secondary);
+}
+
+.clip-source i {
+    margin-right: 3px;
+}
+
+/* ---------------------------------------------------- */
+/* DETAILS VIEW */
+/* ---------------------------------------------------- */
+.details-view {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.meta-info span {
+    display: inline-block;
+    margin-right: 20px;
+    color: var(--color-text-secondary);
+    font-size: 0.9em;
+}
+
+.meta-info i {
+    margin-right: 5px;
+}
+
+/* Boutons d'Action */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.action-btn {
+    background-color: var(--color-bg-hover);
+    color: var(--color-text-main);
+    border: 1px solid var(--color-border);
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.action-btn i {
+    margin-right: 5px;
+}
+
+.action-btn:hover {
+    background-color: #4a4a4a;
+    border-color: var(--color-primary);
+}
+
+.copy-btn {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: white;
+}
+.copy-btn:hover {
+    opacity: 0.9;
+    background-color: var(--color-primary);
+}
+
+/* Zone d'affichage du texte */
+.text-display {
+    background-color: var(--color-bg-sidebar);
+    border-radius: 4px;
+    padding: 15px;
+    max-height: calc(100vh - 120px); /* Ajustement pour la hauteur de la fenêtre */
+    overflow-y: auto;
+}
+
+#clip-full-text {
+    white-space: pre-wrap; /* Maintient les sauts de ligne, mais permet le retour à la ligne */
+    word-wrap: break-word; /* Permet le coupage des mots longs */
+    font-family: monospace;
+    font-size: 1em;
+    line-height: 1.5;
+    color: var(--color-text-main);
+    margin: 0;
+    padding: 0;
+}
+
+
+
+
+
+
+
+/* Variables CSS pour un thème sombre et minimaliste */
+:root {
+    --color-bg-main: #1e1e1e;       /* Fond principal */
+    --color-bg-sidebar: #252526;    /* Barre latérale */
+    --color-bg-hover: #3c3c3c;      /* Survol */
+    --color-text-main: #f0f0f0;     /* Texte clair */
+    --color-text-secondary: #999;   /* Texte meta/hint */
+    --color-primary: #007acc;       /* Couleur d'accentuation (Bleu) */
+    --color-border: #333;
+}
+
+/* ---------------------------------------------------- */
+/* BASE & LAYOUT */
+/* ---------------------------------------------------- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Police moderne et lisible */
+}
+
+body {
+    background-color: var(--color-bg-main);
+    color: var(--color-text-main);
+    font-size: 14px;
+    overflow: hidden;
+}
+
+.app-container {
+    display: flex;
+    height: 100vh;
+}
+
+/* ---------------------------------------------------- */
+/* SIDEBAR & NAVIGATION */
+/* ---------------------------------------------------- */
+.sidebar {
+    width: 300px; /* Légèrement plus étroit pour le minimalisme */
+    background-color: var(--color-bg-sidebar);
+    border-right: 1px solid var(--color-border);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.header h2 {
+    color: var(--color-primary);
+    font-size: 1.5em;
+    font-weight: 300;
+}
+
+/* Navigation Boutons (réutilisés pour le minimalisme) */
+.main-nav {
+    display: flex;
+    gap: 5px;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    color: var(--color-text-secondary);
+    font-size: 1.1em;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.nav-btn:hover {
+    background-color: var(--color-bg-hover);
+    color: var(--color-text-main);
+}
+
+.nav-btn.active {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+/* Liste des Clips */
+.clip-list {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.clip-item {
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border-left: 3px solid transparent; /* Bordure pour l'état actif */
+}
+
+.clip-item:hover {
+    background-color: var(--color-bg-hover);
+}
+
+.clip-item.active {
+    background-color: var(--color-bg-hover); /* Légèrement différent du hover */
+    border-left-color: var(--color-primary); /* Accentuation primaire pour l'actif */
+}
+
+.clip-text-preview {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.clip-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8em;
+    color: var(--color-text-secondary);
+}
+
+.clip-source i {
+    margin-right: 3px;
+}
+
+/* ---------------------------------------------------- */
+/* MAIN CONTENT (VUES) */
+/* ---------------------------------------------------- */
+.main-content-area {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.view {
+    display: none; /* Cache toutes les vues */
+}
+.view.active {
+    display: block; /* Affiche la vue active */
+}
+
+/* Détails d'un Clip */
+.details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.action-btn {
+    background-color: var(--color-bg-hover);
+    color: var(--color-text-main);
+    border: 1px solid var(--color-border);
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.copy-btn {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: white;
+}
+
+.text-display {
+    background-color: var(--color-bg-sidebar);
+    border-radius: 4px;
+    padding: 15px;
+    overflow-y: auto;
+}
+
+#clip-full-text {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: monospace;
+    font-size: 1em;
+    line-height: 1.5;
+    color: var(--color-text-main);
+    margin: 0;
+    padding: 0;
+}
+
+
+/* ---------------------------------------------------- */
+/* FORMULAIRES (SETTINGS/EXPORT) - Styles pour la modularité */
+/* ---------------------------------------------------- */
+.settings-group, .export-options-group {
+    margin-bottom: 30px;
+    padding: 15px;
+    background-color: var(--color-bg-sidebar);
+    border-radius: 6px;
+}
+
+.settings-group h2, .export-options-group h2 {
+    color: var(--color-primary);
+    margin-bottom: 15px;
+    border-bottom: 1px dashed var(--color-border);
+    padding-bottom: 5px;
+}
+
+.setting-item, .export-item {
+    margin-bottom: 15px;
+}
+
+.setting-item label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.setting-item input[type="text"],
+.setting-item input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-bg-main);
+    color: var(--color-text-main);
+    border-radius: 4px;
+}
+
+.hint {
+    font-size: 0.8em;
+    color: var(--color-text-secondary);
+    margin-top: 5px;
+}
+
+.big-export-btn {
+    margin-top: 20px;
+    padding: 12px 25px;
+    font-size: 1.1em;
+}
+
+/* ---------------------------------------------------- */
+/* MODE CLAIR (Thème réversible) */
+/* ---------------------------------------------------- */
+body.light-mode {
+    --color-bg-main: #f8f8f8;
+    --color-bg-sidebar: #ffffff;
+    --color-bg-hover: #e0e0e0;
+    --color-text-main: #333333;
+    --color-text-secondary: #777;
+    --color-border: #cccccc;
+}
+
+body.light-mode .copy-btn {
+    color: white; /* Conserver le contraste du bouton primaire */
+}
