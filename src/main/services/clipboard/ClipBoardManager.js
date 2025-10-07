@@ -61,7 +61,14 @@ class ClipboardManager {
   }
 
   async remove(id) {
-    return this.model.softDelete(id);
+
+    const result = await this.model.softDelete(id); // Exécute la suppression (softDelete)
+    
+    if (result && result.changes > 0) { // Assurez-vous que votre softDelete retourne le nombre de changements
+        appEvents.emit('clip:deleted', id);
+    }
+    
+    return result;
   }
 
   async clearAll() {

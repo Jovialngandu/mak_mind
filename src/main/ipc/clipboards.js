@@ -36,6 +36,22 @@ function registerIpcHandlers(mainWindow=null) {
             return { success: false, error: error.message };
         }
     });
+
+
+    ipcMain.handle('delete-clip', async (event, clipId) => {
+        try {
+            const result = await ClipboardManager.remove(clipId);
+            
+            if (result && result.changes > 0) {
+                 return { success: true, changes: result.changes };
+            } else {
+                 return { success: false, message: "Clip non trouvé ou suppression échouée." };
+            }
+        } catch (error) {
+            console.error(`Erreur lors de la suppression du clip ID ${clipId}:`, error);
+            return { success: false, error: error.message };
+        }
+    });
 }
 
 

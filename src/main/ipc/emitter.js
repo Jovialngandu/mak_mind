@@ -31,6 +31,15 @@ function initializeAppEmitters(mainWindow) {
             //onsole.log('[Emitter] Paramètres mis à jour -> Envoyé au Renderer.');
         }
     });
+
+
+    appEvents.on('clip:deleted', (clipId) => {
+        if (mainWindow.webContents && !mainWindow.webContents.isDestroyed()) {
+            // Envoie au Renderer l'ID du clip supprimé
+            mainWindow.webContents.send('clip-deleted', clipId);
+            //console.log(`[Emitter] Clip supprimé (ID: ${clipId}) -> Notifié le Renderer.`);
+        }
+    });
     
 
     console.log('\n✅[Emitter] Les événements de l\'application sont maintenant liés à IPC.');
