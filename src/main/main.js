@@ -1,46 +1,24 @@
-const { app, BrowserWindow ,ipcMain,clipboard } = require('electron')
-const path = require('node:path')
+const { app,ipcMain,clipboard } = require('electron')
 const { Setting } = require("./services/db");
 const {ClipboardService}=require("./services/clipboard")
 const { registerIpcHandlers } = require("./ipc/clipboards"); 
-
-const createWindow = () => {
-  const win = new BrowserWindow({
-    width: 1000,
-    height: 500,
-    webPreferences: {
-      preload: path.join(__dirname, '../preload/index.js')
-    }
-  })
-
-   win.loadFile(path.join(__dirname, '../renderer/index.html'))
-}
+const {createWindow}=require('./windows')
 
 app.whenReady().then( async () => {
 
-    /*ipcMain.handle('ping', () => 'pong')   
-    const theme = Setting.get("theme");
-    console.log("Thème actuel :", theme); 
-    const interval =Setting.get("clipboard_check_interval");
-    console.log("Intervalle copie :", interval, "ms");
-    Setting.set("language", "fr");
-   
 
-    */
     const intervalMs = parseInt(await Setting.get("clipboard_check_interval")) || 1000;
 
     //console.log("Intervalle de vérification du presse-papier :", intervalMs, "ms");
+    const window=await createWindow()
 
     setInterval(() => {
       ClipboardService.checkClipboard(); 
-    
+      
     }, intervalMs);
 
-    registerIpcHandlers();
+    registerIpcHandlers(window);
        
-    createWindow()
-
-
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) {
         createWindow()
