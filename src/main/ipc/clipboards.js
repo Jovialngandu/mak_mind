@@ -4,7 +4,8 @@ const {ClipboardService} = require('../services/clipboard');
 
 const ClipboardManager=ClipboardService;
 
-function registerIpcHandlers() {
+function registerIpcHandlers(mainWindow=null) {
+
     // Canal pour récupérer les clips récents
     ipcMain.handle('get-recent-clips', async (event, limit) => {
         try {

@@ -21,12 +21,31 @@ class BaseModel {
     );
   }
 
-  create(data) {
+  /*create(data) {
     const keys = Object.keys(data);
     const values = Object.values(data);
     const placeholders = keys.map(() => "?").join(", ");
     const query = `INSERT INTO ${this.tableName} (${keys.join(", ")}) VALUES (${placeholders})`;
+
+    
     return db.run(query, values);
+  }*/
+
+  
+  create(data) {
+    const keys = Object.keys(data);
+    const values = Object.values(data);
+    const placeholders = keys.map(() => "?").join(", ");
+    
+    const query = `INSERT INTO ${this.tableName} (${keys.join(", ")}) VALUES (${placeholders})`;
+    const result = db.run(query, values); // db.run retourne { id: lastInsertRowid, changes: ... }
+    const record = {
+        ...data,
+        id: result.id,
+        created_at: new Date().toISOString()
+    };
+    
+    return record; 
   }
 
   findById(id) {

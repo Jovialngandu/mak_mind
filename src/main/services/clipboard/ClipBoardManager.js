@@ -2,6 +2,7 @@
 const { clipboard } = require("electron");
 const ClipboardModel = require("../db/models/ClipBoard"); // chemin correct vers le modèle
 const clipboardCache = require("../cache"); // cache persistant
+const { appEvents } = require('../../ipc/emitter'); 
 
 class ClipboardManager {
   constructor() {
@@ -27,8 +28,11 @@ class ClipboardManager {
     //console.log(text)
     const record = await this.model.create({ content: text, source });
 
+    appEvents.emit('clip:added', record);
     // On met à jour le cache
     clipboardCache.set("last_clipboard", text);
+
+
 
     return record;
   }
