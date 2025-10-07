@@ -61,6 +61,17 @@ class BaseModel {
     );
   }
 
+  findLatest() {
+      // Supposons que 'id' est un auto-incrément, donc l'ID le plus élevé est le plus récent,
+      // ou que 'created_at' est un timestamp
+      const query = `SELECT * FROM ${this.tableName} 
+                    ORDER BY id DESC 
+                    LIMIT 1`;
+      
+      // Votre fonction db.get() doit être utilisée ici pour récupérer une seule ligne
+      return db.get(query); 
+  }
+
   update(id, data) {
     const keys = Object.keys(data);
     const values = Object.values(data);

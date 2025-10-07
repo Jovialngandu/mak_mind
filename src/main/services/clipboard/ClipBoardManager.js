@@ -1,13 +1,38 @@
 // src/main/services/clipboard/ClipboardManager.js
 const { clipboard } = require("electron");
 const ClipboardModel = require("../db/models/ClipBoard"); // chemin correct vers le modèle
-const clipboardCache = require("../cache"); // cache persistant
+const clipboardCache = require("../cache"); // cache persistant (assumé persistant ou in-memory)
 const { appEvents } = require('../../ipc/emitter'); 
 
 class ClipboardManager {
   constructor() {
     this.model = ClipboardModel;
+    this.initializeCache(); 
   }
+
+  /**
+   * INITIALISE le cache 'last_clipboard' en le synchronisant avec la DB.
+   * Ceci est crucial pour éviter de réenregistrer le même élément au redémarrage.
+   */
+  async initializeCache() {
+    try {
+      // Assurez-vous d'avoir une méthode pour récupérer le dernier enregistrement par date/ID
+      const latestClip = await this.model.findLatest(); 
+      
+      if (latestClip && latestClip.content) {
+        // Met à jour le cache in-memory/persistant avec le contenu le plus récent de la DB
+        clipboardCache.set("last_clipboard", latestClip.content);
+        //console.log(`[Cache Sync] Synchronisation réussie. Dernier clip: "${latestClip.content.substring(0, 30)}..."`);
+      } else {
+        // Si la DB est vide, assurez-vous que le cache est vide
+        clipboardCache.set("last_clipboard", null); 
+        //console.log("[Cache Sync] Base de données vide, cache initialisé à vide.");
+      }
+    } catch (error) {
+      console.error("[Cache Sync] Erreur lors de la synchronisation du cache:", error);
+    }
+  }
+
 
   /**
    * Vérifie le presse-papier et sauvegarde si nouveau
@@ -18,20 +43,20 @@ class ClipboardManager {
     const text = this.readText();
     if (!text) return null;
 
-    const lastCached = clipboardCache.get("last_clipboard");
+    // Le cache est maintenant initialisé avec la dernière valeur de la DB au démarrage
+    const lastCached = clipboardCache.get("last_clipboard"); 
+    
     if (text === lastCached) {
       // Déjà sauvegardé, on ne fait rien
       return null;
     }
 
     // Nouveau texte, on sauvegarde
-    //console.log(text)
     const record = await this.model.create({ content: text, source });
 
     appEvents.emit('clip:added', record);
-    // On met à jour le cache
-    clipboardCache.set("last_clipboard", text);
-
+    // On met à jour le cache AVEC LE NOUVEAU TEXTE
+    clipboardCache.set("last_clipboard", text); 
 
 
     return record;
