@@ -29,7 +29,7 @@ function registerIpcHandlers(mainWindow=null) {
     // Ajout d'une gestion pour la copie
     ipcMain.handle('write-to-clipboard', (event, text) => {
         try {
-            clipboard.writeText(text);
+            ClipboardManager.writeText(text);
             return { success: true };
         } catch (error) {
             console.error('Erreur lors de l\'écriture dans le presse-papier:', error);

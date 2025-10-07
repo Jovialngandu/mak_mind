@@ -41,6 +41,9 @@ class ClipboardManager {
     return clipboard.readText();
   }
 
+  writeText(text){
+    clipboard.writeText(text)
+  }
   // Récupère les derniers textes
   async getRecent(limit = 50) {
     const all = await this.model.findAll(); // utilise la fonction héritée
