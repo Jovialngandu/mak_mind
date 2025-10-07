@@ -1,7 +1,7 @@
 // src/renderer/index.js (Nouveau point d'entrée minimaliste)
 import { setupNavigation, setupThemeToggle } from './js/navigation.js';
-import { loadInitialClips, setupSearch ,prependClip} from './js/clipRenderer.js';
-import { setupCopyAction } from './js/detailsHandler.js';
+import { loadInitialClips, setupSearch ,prependClip,removeClipFromList} from './js/clipRenderer.js';
+import { setupCopyAction,setupDeleteAction } from './js/detailsHandler.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Initialisation des modules
@@ -12,8 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. Logique d'affichage et d'interaction
     setupSearch();
     setupCopyAction();
-    
-    // 3. Chargement initial des données
+    setupDeleteAction();
     loadInitialClips();
 
 
@@ -26,6 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentQuery.length === 0) {
             prependClip(newClip);
         }
+    });
+
+    window.clipboardAPI.onClipDeleted((clipId) => {
+        removeClipFromList(clipId);
     });
 
 });

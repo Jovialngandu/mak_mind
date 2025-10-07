@@ -10,6 +10,7 @@ contextBridge.exposeInMainWorld('versions', {
 
 
 contextBridge.exposeInMainWorld('clipboardAPI', {
+
   getRecentClips: (limit) => ipcRenderer.invoke('get-recent-clips', limit),
 
   searchClips: (query) => ipcRenderer.invoke('search-clips', query),
@@ -25,5 +26,12 @@ contextBridge.exposeInMainWorld('clipboardAPI', {
             // newClip est l'objet complet du clip
             callback(newClip);
         });
+  },
+
+  deleteClip: (clipId) => ipcRenderer.invoke('delete-clip', clipId),
+
+  onClipDeleted: (callback) => {
+        ipcRenderer.removeAllListeners('clip-deleted'); 
+        ipcRenderer.on('clip-deleted', (event, clipId) => callback(clipId));
     }
 })
