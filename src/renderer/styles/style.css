@@ -492,3 +492,112 @@ body.light-mode {
 body.light-mode .copy-btn {
     color: white; /* Conserver le contraste du bouton primaire */
 }
+
+
+
+
+
+
+/* styles/style.css */
+
+/* Ajout pour corriger le Flexbox de la liste d'historique */
+#history-sidebar-content {
+    display: flex; /* Maintient l'agencement de la recherche et de la liste */
+    flex-direction: column; /* Agence la barre de recherche et la liste verticalement */
+    flex-grow: 1; /* ABSOLUMENT ESSENTIEL : Permet au conteneur de prendre l'espace restant dans la sidebar */
+    min-height: 0; /* Important : Évite que le contenu n'écrase la hauteur, permettant le défilement dans l'enfant */
+}
+
+/* Vous avez déjà ces règles pour la liste, qui sont bonnes : */
+.clip-list {
+    flex-grow: 1; /* Permet à la liste de prendre tout l'espace disponible */
+    overflow-y: auto; /* Active le défilement */
+    /* padding-right: 5px; */
+}
+
+
+/* Personnalisation des Scrollbars pour Chrome/Edge/Safari (Webkit) */
+.clip-list::-webkit-scrollbar,
+.text-display::-webkit-scrollbar,
+.main-content-area::-webkit-scrollbar {
+    width: 8px; /* Taille de la barre verticale */
+    height: 8px; /* Taille de la barre horizontale */
+}
+
+.clip-list::-webkit-scrollbar-track,
+.text-display::-webkit-scrollbar-track,
+.main-content-area::-webkit-scrollbar-track {
+    background: var(--color-bg-sidebar); /* Fond de la piste */
+}
+
+.clip-list::-webkit-scrollbar-thumb,
+.text-display::-webkit-scrollbar-thumb,
+.main-content-area::-webkit-scrollbar-thumb {
+    background-color: var(--color-text-secondary); /* Couleur de la poignée */
+    border-radius: 4px;
+    border: 2px solid var(--color-bg-sidebar); /* Petite bordure pour la rendre plus fine */
+}
+
+.clip-list::-webkit-scrollbar-thumb:hover,
+.text-display::-webkit-scrollbar-thumb:hover,
+.main-content-area::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-primary); /* Survol en couleur primaire */
+}
+
+
+/* Adaptations pour le Mode Clair */
+body.light-mode .clip-list::-webkit-scrollbar-thumb,
+body.light-mode .text-display::-webkit-scrollbar-thumb,
+body.light-mode .main-content-area::-webkit-scrollbar-thumb {
+    /* La poignée en mode clair sera d'un gris plus neutre */
+    background-color: #bbbbbb; 
+    /* Le fond de la piste en mode clair est le blanc de la sidebar */
+    border: 2px solid var(--color-bg-sidebar); 
+}
+
+body.light-mode .clip-list::-webkit-scrollbar-thumb:hover,
+body.light-mode .text-display::-webkit-scrollbar-thumb:hover,
+body.light-mode .main-content-area::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-primary); /* La couleur primaire reste visible au survol */
+}
+
+/* ---------------------------------------------------- */
+/* MODE CLAIR (Thème réversible) */
+/* ---------------------------------------------------- */
+body.light-mode {
+    /* Variables principales du thème clair */
+    --color-bg-main: #f8f8f8;
+    --color-bg-sidebar: #ffffff;
+    --color-bg-hover: #e0e0e0;
+    --color-text-main: #333333;
+    --color-text-secondary: #777;
+    --color-border: #cccccc;
+    --color-primary: #007acc; 
+
+    /* Nouveau: Couleur d'arrière-plan plus neutre et visible pour l'état ACTIF en mode clair */
+    --color-bg-active-light: #d8d8d8; 
+    /* Nouveau: La couleur du texte doit rester foncée pour le contraste */
+    --color-text-active-light: var(--color-text-main); 
+}
+
+/* Surcharge des styles du clip actif pour le mode clair */
+body.light-mode .clip-item.active {
+    /* Utilise une couleur de fond qui crée un contraste plus fort que l'ancien bleu pale */
+    background-color: var(--color-bg-active-light); 
+    
+    /* Conserve la ligne d'accentuation primaire (le bleu) */
+    border-left-color: var(--color-primary); 
+    
+    /* Conserve le texte en couleur principale foncée */
+    color: var(--color-text-active-light); 
+}
+
+/* 💡 Astuce : L'état actif devrait aussi réagir au survol pour un meilleur feedback */
+body.light-mode .clip-item.active:hover {
+    background-color: #c8c8c8; /* Rendre le survol de l'actif encore plus foncé */
+}
+
+/* Assurez-vous que le texte secondaire (meta) reste lisible sur le fond actif */
+body.light-mode .clip-item.active .clip-meta {
+    color: var(--color-text-secondary); 
+}
