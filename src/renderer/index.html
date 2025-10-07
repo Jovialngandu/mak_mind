@@ -53,7 +53,7 @@
                         </div>
                         <div class="action-buttons">
                             <button class="action-btn copy-btn" title="Copier à nouveau"><i class="far fa-copy"></i> Copier</button>
-                            <button class="action-btn" title="Supprimer le clip"><i class="fas fa-trash-alt"></i> Supprimer</button>
+                            <button class="action-btn delete-btn" title="Supprimer le clip"><i class="fas fa-trash-alt"></i> Supprimer</button>
                             <button class="action-btn" title="Exporter ce clip"><i class="fas fa-file-export"></i></button> 
                         </div>
                     </header>
@@ -66,6 +66,7 @@ Sélectionnez un clip dans l'historique pour afficher son contenu complet.
                 </div>
             </section>
             
+            <!-- 📢 MISE À JOUR : Contenu complet de la vue des paramètres -->
             <section class="view hidden" id="settings-view">
                 <div class="view-header">
                     <h1><i class="fas fa-cog"></i> Paramètres</h1>
@@ -84,7 +85,15 @@ Sélectionnez un clip dans l'historique pour afficher son contenu complet.
                         <button id="theme-toggle" class="action-btn"><i class="fas fa-sun"></i> Mode Clair</button>
                     </div>
                 </div>
+
+                <div class="settings-actions">
+                    <button id="save-settings-btn" class="action-btn primary-btn">
+                        <i class="fas fa-save"></i> Sauvegarder les modifications
+                    </button>
+                    <div id="settings-status" class="status-message"></div>
+                </div>
             </section>
+            <!-- 📢 FIN DE LA MISE À JOUR -->
 
             <section class="view hidden" id="export-view">
                 <div class="view-header">
