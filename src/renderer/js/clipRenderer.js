@@ -93,6 +93,42 @@ export function renderClips(clips) {
     }
 }
 
+
+/**
+ * Insère un nouveau clip en haut de la liste sans perturber le défilement actuel.
+ * @param {Clip} newClip - L'objet clip complet.
+ */
+export function prependClip(newClip) {
+    // 1. Créer le nouvel élément HTML
+    const newItem = createClipItem(newClip);
+
+    // 2. Insérer l'élément en haut de la liste
+    if (clipList.firstChild) {
+        // Supprime le message 'Aucun clip trouvé' si présent, puis insère
+        if (clipList.firstChild.id === 'no-clips-message') {
+             clipList.innerHTML = ''; // Nettoyer le message d'absence de clip
+        }
+        clipList.insertBefore(newItem, clipList.firstChild);
+    } else {
+        // La liste était vide
+        clipList.appendChild(newItem);
+    }
+    
+    // 3. Ajouter l'écouteur de clic
+    newItem.addEventListener('click', function() {
+        // Logic de sélection
+        document.querySelectorAll('.clip-item').forEach(i => i.classList.remove('active'));
+        this.classList.add('active');
+        updateDetailsView(newClip);
+    });
+
+    // 4. Mettre en surbrillance le nouvel élément (optionnel)
+    // newItem.classList.add('active');
+    // updateDetailsView(newClip);
+    
+    // 💡 IMPORTANT : Nous évitons de faire défiler ou de changer la sélection 
+    // pour ne pas interrompre l'utilisateur s'il est en train de regarder d'anciens clips.
+}
 /**
  * Initialise la recherche en fonction de l'entrée utilisateur.
  */
