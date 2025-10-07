@@ -2,11 +2,12 @@ const { app, BrowserWindow ,ipcMain,clipboard } = require('electron')
 const path = require('node:path')
 const { Setting } = require("./services/db");
 const {ClipboardService}=require("./services/clipboard")
+const { registerIpcHandlers } = require("./ipc/clipboards"); 
 
 const createWindow = () => {
   const win = new BrowserWindow({
     width: 1000,
-    height: 700,
+    height: 500,
     webPreferences: {
       preload: path.join(__dirname, '../preload/index.js')
     }
@@ -23,15 +24,19 @@ app.whenReady().then( async () => {
     const interval =Setting.get("clipboard_check_interval");
     console.log("Intervalle copie :", interval, "ms");
     Setting.set("language", "fr");
+   
+
     */
     const intervalMs = parseInt(await Setting.get("clipboard_check_interval")) || 1000;
 
-    console.log("Intervalle de vérification du presse-papier :", intervalMs, "ms");
+    //console.log("Intervalle de vérification du presse-papier :", intervalMs, "ms");
 
     setInterval(() => {
       ClipboardService.checkClipboard(); 
     
     }, intervalMs);
+
+    registerIpcHandlers();
        
     createWindow()
 

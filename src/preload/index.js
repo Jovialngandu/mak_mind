@@ -8,3 +8,9 @@ contextBridge.exposeInMainWorld('versions', {
   // nous pouvons aussi exposer des variables en plus des fonctions
 })
 
+
+contextBridge.exposeInMainWorld('clipboardAPI', {
+  getRecentClips: (limit) => ipcRenderer.invoke('get-recent-clips', limit),
+  searchClips: (query) => ipcRenderer.invoke('search-clips', query),
+  copyText: (text) => ipcRenderer.invoke('write-to-clipboard', text) // Pour le bouton "Copier à nouveau"
+})

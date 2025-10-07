@@ -24,7 +24,7 @@ class ClipboardManager {
     }
 
     // Nouveau texte, on sauvegarde
-    console.log(text)
+    //console.log(text)
     const record = await this.model.create({ content: text, source });
 
     // On met à jour le cache
