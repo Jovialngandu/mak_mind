@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MakMind - Clipboard Manager</title>
     <link rel="stylesheet" href="styles/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="assets/fontawesome/css/all.min.css">
+
 </head>
 
 <body class="dark-mode">
-
     <div class="app-container">
         
         <aside class="sidebar">
@@ -28,110 +28,14 @@
                 </nav>
             </div>
             
-            <div id="history-sidebar-content">
+            <div id="history-sidebar-content" style="display: flex;">
                 <div class="search-box">
                     <i class="fas fa-search"></i>
                     <input type="text" id="search-input" placeholder="Rechercher...">
                 </div>
-                
                 <div class="clip-list">
-                    <div class="clip-item active" data-id="1">
-                        <div class="clip-text-preview">Mock data 1: Contenu du texte copié...</div>
-                        <div class="clip-meta">
-                            <span class="clip-time">14:30 - 05/10/25</span>
-                            <span class="clip-source"><i class="fas fa-code"></i> VS Code</span>
-                        </div>
                     </div>
-                    <div class="clip-item" data-id="2">
-                        <div class="clip-text-preview">Ceci est un autre texte de test pour la...</div>
-                        <div class="clip-meta">
-                            <span class="clip-time">14:20 - 05/10/25</span>
-                            <span class="clip-source"><i class="fas fa-globe"></i> Chrome</span>
-                        </div>
-                    </div>
-                    <div class="clip-item" data-id="3">
-                        <div class="clip-text-preview">Un simple mot pour tester l'aperçu.</div>
-                        <div class="clip-meta">
-                            <span class="clip-time">14:15 - 05/10/25</span>
-                            <span class="clip-source"><i class="fas fa-terminal"></i> Terminal</span>
-                        </div>
-                    </div>
-
-                      <div class="clip-item" data-id="4">
-                        <div class="clip-text-preview">Un simple mot pour tester l'aperçu.</div>
-                        <div class="clip-meta">
-                            <span class="clip-time">14:15 - 05/10/25</span>
-                            <span class="clip-source"><i class="fas fa-terminal"></i> Terminal</span>
-                        </div>
-
-                    </div>
-
-                      <div class="clip-item" data-id="5">
-                        <div class="clip-text-preview">Un simple mot pour tester l'aperçu.</div>
-                        <div class="clip-meta">
-                            <span class="clip-time">14:15 - 05/10/25</span>
-                            <span class="clip-source"><i class="fas fa-terminal"></i> Terminal</span>
-                        </div>
-                    </div>
-                     <div class="clip-item" data-id="5">
-                        <div class="clip-text-preview">Un simple mot pour tester l'aperçu.</div>
-                        <div class="clip-meta">
-                            <span class="clip-time">14:15 - 05/10/25</span>
-                            <span class="clip-source"><i class="fas fa-terminal"></i> Terminal</span>
-                        </div>
-                    </div>
-                     <div class="clip-item" data-id="5">
-                        <div class="clip-text-preview">Un simple mot pour tester l'aperçu.</div>
-                        <div class="clip-meta">
-                            <span class="clip-time">14:15 - 05/10/25</span>
-                            <span class="clip-source"><i class="fas fa-terminal"></i> Terminal</span>
-                        </div>
-                    </div>
-                     <div class="clip-item" data-id="5">
-                        <div class="clip-text-preview">Un simple mot pour tester l'aperçu.</div>
-                        <div class="clip-meta">
-                            <span class="clip-time">14:15 - 05/10/25</span>
-                            <span class="clip-source"><i class="fas fa-terminal"></i> Terminal</span>
-                        </div>
-                    </div>
-                     <div class="clip-item" data-id="5">
-                        <div class="clip-text-preview">Un simple mot pour tester l'aperçu.</div>
-                        <div class="clip-meta">
-                            <span class="clip-time">14:15 - 05/10/25</span>
-                            <span class="clip-source"><i class="fas fa-terminal"></i> Terminal</span>
-                        </div>
-                    </div>
-                     <div class="clip-item" data-id="5">
-                        <div class="clip-text-preview">Un simple mot pour tester l'aperçu.</div>
-                        <div class="clip-meta">
-                            <span class="clip-time">14:15 - 05/10/25</span>
-                            <span class="clip-source"><i class="fas fa-terminal"></i> Terminal</span>
-                        </div>
-                    </div>
-                     <div class="clip-item" data-id="5">
-                        <div class="clip-text-preview">Un simple mot pour tester l'aperçu.</div>
-                        <div class="clip-meta">
-                            <span class="clip-time">14:15 - 05/10/25</span>
-                            <span class="clip-source"><i class="fas fa-terminal"></i> Terminal</span>
-                        </div>
-                    </div>
-                     <div class="clip-item" data-id="5">
-                        <div class="clip-text-preview">Un simple mot pour tester l'aperçu.</div>
-                        <div class="clip-meta">
-                            <span class="clip-time">14:15 - 05/10/25</span>
-                            <span class="clip-source"><i class="fas fa-terminal"></i> Terminal</span>
-                        </div>
-                    </div>
-                     <div class="clip-item" data-id="5">
-                        <div class="clip-text-preview">Un simple mot pour tester l'aperçu.</div>
-                        <div class="clip-meta">
-                            <span class="clip-time">14:15 - 05/10/25</span>
-                            <span class="clip-source"><i class="fas fa-terminal"></i> Terminal</span>
-                        </div>
-                    </div>
-                </div>
             </div>
-
         </aside>
 
         <main class="main-content-area">
@@ -141,10 +45,10 @@
                     <header class="details-header">
                         <div class="meta-info">
                             <span class="detail-source">
-                                <i class="fas fa-code"></i> Source: Visual Studio Code
+                                <i class="fas fa-desktop"></i> Source: Chargement...
                             </span>
                             <span class="detail-date">
-                                <i class="far fa-calendar-alt"></i> 05 Octobre 2025, 14:30:15
+                                <i class="far fa-calendar-alt"></i> Date: Chargement...
                             </span>
                         </div>
                         <div class="action-buttons">
@@ -156,42 +60,17 @@
                     
                     <div class="text-display">
                         <pre id="clip-full-text">
-Ceci est le contenu complet du texte copié pour le clip sélectionné.
-Il peut contenir du code, des listes, ou des paragraphes longs.
-La balise PRE garantit la préservation des formats et des sauts de ligne, ce qui est crucial pour la précision du presse-papier.
-
-Base de données: SQLite est la base actuelle, mais une restructuration est prévue.
-Futures fonctionnalités: intégration IA, gestion d'images (plus tard).
-
-
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet veniam perferendis iusto consectetur deserunt voluptatum explicabo ex non autem, molestias harum debitis sint cumque mollitia reiciendis, repellat corporis numquam necessitatibus!
-Eum dolorem nobis odio reiciendis adipisci illo facere qui provident nemo blanditiis fuga hic fugit repellat, eveniet autem eius? Commodi tempora dolor hic sint quos sequi neque odio voluptates molestias.
-Enim fugit, consequatur dolore explicabo tempore consectetur sunt dicta ducimus molestiae distinctio nulla tenetur, minima labore perspiciatis minus ex corporis. Cupiditate pariatur error deleniti eligendi quae perferendis repellat, vero ducimus?
-Voluptatum, et. Sed quo facilis blanditiis, veniam quas eveniet perspiciatis odit omnis amet necessitatibus aperiam saepe maiores placeat reprehenderit qui molestias incidunt rerum est enim ullam. Numquam eum porro magni!
-Obcaecati at doloremque tenetur animi. Quis error recusandae consectetur facere, dolores, nisi natus neque laboriosam harum quos voluptatum similique, quaerat laborum. Unde accusantium porro rem ad nihil doloribus adipisci sint!
-Sequi temporibus ratione neque voluptatum quas laboriosam eos perspiciatis modi ullam saepe laborum, enim recusandae harum possimus alias, praesentium eum doloribus nostrum. Obcaecati, itaque facilis dicta expedita molestiae ab quaerat?
-Sapiente suscipit enim ipsam fugiat, tenetur nemo dolorem cumque consequuntur ipsa odio debitis dicta explicabo soluta ea esse corporis molestiae a amet at nesciunt quia? Esse earum iste aspernatur temporibus!
-Voluptas quibusdam tenetur possimus impedit, in doloremque, veniam, sed voluptate consequuntur vitae dolores. Veritatis neque odit commodi atque odio temporibus quisquam laborum, repudiandae quibusdam totam modi voluptatem vero aut nam!
-Nihil possimus ab non consectetur temporibus cupiditate quia minus animi ducimus enim sequi doloribus, assumenda porro perferendis! Reiciendis a beatae aspernatur dolorem repellendus. Iusto placeat, vitae at quidem accusamus enim?
-Id totam iusto eaque. Numquam quia quod tempora accusantium placeat laboriosam, explicabo enim aut nemo facilis dolor molestiae non facere consectetur eaque perferendis eius temporibus, recusandae sed voluptates consequuntur consequatur!
+Sélectionnez un clip dans l'historique pour afficher son contenu complet.
                         </pre>
                     </div>
                 </div>
             </section>
-
+            
             <section class="view hidden" id="settings-view">
                 <div class="view-header">
                     <h1><i class="fas fa-cog"></i> Paramètres</h1>
                 </div>
                 
-                <div class="settings-group">
-                    <h2>Intégration et Clé API</h2>
-                    <div class="setting-item">
-                        <label for="api-key-input">Clé API (OpenAI/Autre)</label>
-                        <input type="text" id="api-key-input" placeholder="Saisissez votre clé d'intégration IA">
-                        <p class="hint">Nécessaire pour les futures fonctionnalités avancées (analyse, traduction).</p>
-                    </div>
-                </div>
 
                 <div class="settings-group">
                     <h2>Options de base</h2>
@@ -233,7 +112,7 @@ Id totam iusto eaque. Numquam quia quod tempora accusantium placeat laboriosam, 
         </main>
     </div>
     
-    <script src="index.js"></script> 
+    <script type="module" src="index.js"></script> 
 
 </body>
 </html>
