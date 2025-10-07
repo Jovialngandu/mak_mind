@@ -1,7 +1,7 @@
 const { app,ipcMain,clipboard } = require('electron')
 const { Setting } = require("./services/db");
 const {ClipboardService}=require("./services/clipboard")
-const { registerIpcHandlers } = require("./ipc/clipboards"); 
+const { registerIpcHandlers } = require("./ipc/handler"); 
 const {createWindow}=require('./windows')
 
 app.whenReady().then( async () => {

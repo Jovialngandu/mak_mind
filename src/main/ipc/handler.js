@@ -1,7 +1,7 @@
 // src/main/ipc/clipboards.js
 const { ipcMain } = require('electron');
 const {ClipboardService} = require('../services/clipboard'); 
-
+const SettingsManager = require('../services/setting/SettingsManager'); 
 const ClipboardManager=ClipboardService;
 
 function registerIpcHandlers(mainWindow=null) {
@@ -50,6 +50,26 @@ function registerIpcHandlers(mainWindow=null) {
         } catch (error) {
             console.error(`Erreur lors de la suppression du clip ID ${clipId}:`, error);
             return { success: false, error: error.message };
+        }
+    });
+
+    // Canal pour récupérer tous les paramètres
+    ipcMain.handle('get-settings', async () => {
+        try {
+            return await SettingsManager.getSettings();
+        } catch (error) {
+            console.error('Erreur lors de la récupération des paramètres:', error);
+            return SettingsManager.defaultSettings;
+        }
+    });
+
+    // Canal pour sauvegarder les paramètres
+    ipcMain.handle('save-settings', async (event, settings) => {
+        try {
+            return await SettingsManager.saveSettings(settings);
+        } catch (error) {
+            console.error('Erreur lors de la sauvegarde des paramètres:', error);
+            return { success: false, message: error.message };
         }
     });
 }
