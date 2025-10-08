@@ -3,6 +3,7 @@ import { setupNavigation, setupThemeToggle } from './js/navigation.js';
 import { loadInitialClips, setupSearch ,prependClip,removeClipFromList} from './js/clipRenderer.js';
 import { setupCopyAction,setupDeleteAction } from './js/detailsHandler.js';
 import {setupSettings} from './js/settingsHandler.js'
+import { setupExport } from './js/exportHandler.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Initialisation des modules
@@ -16,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupDeleteAction();
     loadInitialClips();
     setupSettings();
+    setupExport();
 
 
     window.clipboardAPI.onClipAdded((newClip) => {

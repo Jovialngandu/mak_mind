@@ -104,8 +104,8 @@ Sélectionnez un clip dans l'historique pour afficher son contenu complet.
                     <h2>Format et Contenu</h2>
                     <div class="export-item">
                         <label>Format de Fichier :</label>
-                        <label><input type="radio" name="export-format" value="json" checked> JSON</label>
-                        <label><input type="radio" name="export-format" value="csv"> CSV</label>
+                        <label><input type="radio" name="export-format" value="json" id="export-json" checked> JSON</label>
+                        <label><input type="radio" name="export-format" value="csv" id="export-csv"> CSV</label>
                     </div>
                     <div class="export-item">
                         <label>Inclure la source et la date dans l'export :</label>
@@ -113,9 +113,10 @@ Sélectionnez un clip dans l'historique pour afficher son contenu complet.
                     </div>
                 </div>
 
-                <button class="action-btn copy-btn big-export-btn">
+                <button id="export-button" class="action-btn primary-btn big-export-btn">
                     <i class="fas fa-download"></i> Exporter l'historique complet
                 </button>
+                <div id="export-status" class="status-message"></div>
             </section>
 
         </main>
