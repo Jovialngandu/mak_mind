@@ -21,6 +21,8 @@ export function setupNavigation() {
                 view.classList.remove('active');
                 if (view.id === targetViewId + '-view') {
                     view.classList.add('active');
+                    view.classList.remove('hidden');
+
                 }
             });
         });

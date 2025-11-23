@@ -10,14 +10,7 @@ function registerIpcHandlers(mainWindow=null) {
     // Canal pour récupérer les clips récents
     ipcMain.handle('get-recent-clips', async (event, limit) => {
         try {
-            return await ClipboardManager.getRecent(limit);ipcMain.handle('export-clips', async (event, options) => {
-        try {
-            return await ExportManager.exportClips(options);
-        } catch (error) {
-            console.error('Erreur lors de l\'exportation des clips:', error);
-            return { success: false, message: "Erreur interne du service d'exportation." };
-        }
-    });
+            return await ClipboardManager.getRecent(limit);
         } catch (error) {
             console.error('Erreur lors de la récupération des clips:', error);
             return [];
@@ -42,14 +35,9 @@ function registerIpcHandlers(mainWindow=null) {
         } catch (error) {
             console.error('Erreur lors de l\'écriture dans le presse-papier:', error);
             return { success: false, error: error.message };
-        }ipcMain.handle('export-clips', async (event, options) => {
-        try {
-            return await ExportManager.exportClips(options);
-        } catch (error) {
-            console.error('Erreur lors de l\'exportation des clips:', error);
-            return { success: false, message: "Erreur interne du service d'exportation." };
         }
-    });
+        
+        
     });
 
 
@@ -88,6 +76,7 @@ function registerIpcHandlers(mainWindow=null) {
         }
     });
 
+
     ipcMain.handle('export-clips', async (event, options) => {
         try {
             return await ExportManager.exportClips(options);
@@ -96,6 +85,7 @@ function registerIpcHandlers(mainWindow=null) {
             return { success: false, message: "Erreur interne du service d'exportation." };
         }
     });
+
 }
 
 
