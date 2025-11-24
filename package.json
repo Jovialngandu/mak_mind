@@ -1,7 +1,7 @@
 {
   "name": "mak_mind",
   "version": "1.0.0",
-  "description": "Desktop application to capture, organize, and enrich everything you copy to your clipboard. MakMind automatically saves text snippets and links along with their source, allowing you to search, export (CSV, Excel, JSON), translate, and analyze them with AI.",
+  "description": "Desktop application to capture, organize, and enrich everything you copy to your clipboard. MakMind automatically saves text snippets and links along with their source, allowing you to search, export (CSV, Excel, JSON)",
   "license": "ISC",
   "author": "jovial ngandu",
   "type": "commonjs",
@@ -16,8 +16,6 @@
   },
   "dependencies": {
     "better-sqlite3": "^12.4.1",
-    "dotenv": "^17.2.3",
-    "node-cache": "^5.1.2",
-    "node-fetch": "^2.7.0"
+    "node-cache": "^5.1.2"
   }
 }

@@ -2,6 +2,7 @@
 const { ipcMain } = require('electron');
 const {ClipboardService} = require('../services/clipboard'); 
 const SettingsManager = require('../services/setting/SettingsManager'); 
+const ExportManager = require('../services/export/ExportManager'); 
 const ClipboardManager=ClipboardService;
 
 function registerIpcHandlers(mainWindow=null) {
@@ -35,6 +36,8 @@ function registerIpcHandlers(mainWindow=null) {
             console.error('Erreur lors de l\'écriture dans le presse-papier:', error);
             return { success: false, error: error.message };
         }
+        
+        
     });
 
 
@@ -72,6 +75,17 @@ function registerIpcHandlers(mainWindow=null) {
             return { success: false, message: error.message };
         }
     });
+
+
+    ipcMain.handle('export-clips', async (event, options) => {
+        try {
+            return await ExportManager.exportClips(options);
+        } catch (error) {
+            console.error('Erreur lors de l\'exportation des clips:', error);
+            return { success: false, message: "Erreur interne du service d'exportation." };
+        }
+    });
+
 }
 
 

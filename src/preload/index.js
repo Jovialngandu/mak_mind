@@ -37,5 +37,7 @@ contextBridge.exposeInMainWorld('clipboardAPI', {
 
   getSettings: () => ipcRenderer.invoke('get-settings'),
   saveSettings: (settings) => ipcRenderer.invoke('save-settings', settings),
+
+  exportClips: (options) => ipcRenderer.invoke('export-clips', options),
   
 })
