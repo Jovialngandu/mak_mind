@@ -1,12 +1,21 @@
 const Database = require("better-sqlite3");
 const path = require("path");
+const { app } = require("electron");
 
 class DB {
   constructor() {
-    const dbPath = path.resolve(__dirname, "app.db");
+
+    // AppData user path : ~/.config/makmind/ (sur Linux)
+    const userDataPath = app.getPath("userData");
+
+    // Chemin final vers la DB
+    const dbPath = path.join(userDataPath, "app.db");
+
+    console.log("📌 Using SQLite DB at:", dbPath);
+
     this.db = new Database(dbPath);
 
-    console.log("✅ Connected to SQLite with better-sqlite3:", dbPath);
+    console.log("✅ Connected to SQLite with better-sqlite3");
   }
 
   run(query, params = []) {

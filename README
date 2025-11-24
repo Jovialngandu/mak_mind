@@ -1,0 +1,37 @@
+# MakMind - Clipboard Manager
+
+Capture, organise et enrichit tout ce que tu copies dans ton presse-papiers.
+
+##  Fonctionnalités
+
+- **Capture automatique** : Sauvegarde automatiquement tous tes copiés (textes et liens)
+<!-- - **Contexte préservé** : Garde la source de chaque élément copié -->
+- **Recherche rapide** : Retrouve facilement tes anciens copiés
+- **Export multiple** : Exporte tes données en CSV  ou JSON
+- **Mode discret** : Fonctionne en arrière-plan sans interface
+
+## Installation
+
+```bash
+# Cloner le projet
+git clone https://github.com/Jovialngandu/mak_mind.git
+
+# Installer les dépendances
+npm install
+
+# Lancer l'application
+npm start
+```
+
+## Mode Normal (avec interface)
+
+```bash
+npm start
+#L'application s'ouvre avec une interface complète.
+```
+
+## Mode Headless (sans interface)
+```bash
+npm start -- headless
+#L'application tourne en arrière-plan, capture tes copiés sans afficher de fenêtre. comme un ninja
+```

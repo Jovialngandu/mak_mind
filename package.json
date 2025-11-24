@@ -1,21 +1,64 @@
 {
-  "name": "mak_mind",
+  "name": "makmind",
   "version": "1.0.0",
-  "description": "Desktop application to capture, organize, and enrich everything you copy to your clipboard. MakMind automatically saves text snippets and links along with their source, allowing you to search, export (CSV, Excel, JSON)",
+  "description": "Desktop application to capture, organize, and enrich everything you copy to your clipboard. MakMind automatically saves text snippets and links along , allowing you to search, export (CSV, Excel, JSON)",
   "license": "ISC",
   "author": "jovial ngandu",
   "type": "commonjs",
   "main": "src/main/main.js",
   "scripts": {
     "start": "electron .",
+    "build": "electron-builder",
+    "build:win": "electron-builder --win",
+    "build:mac": "electron-builder --mac",
+    "build:linux": "electron-builder --linux",
+    "dist": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "electron": "^25.9.8",
-    "electron-rebuild": "^3.2.9"
+    "electron": "^24.8.7",
+    "electron-builder": "^26.0.12"
   },
   "dependencies": {
     "better-sqlite3": "^12.4.1",
     "node-cache": "^5.1.2"
+  },
+  "build": {
+    "appId": "com.makmind.app",
+    "productName": "makmind",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "preload/**/*",
+      "renderer/**/*",
+      "assets/**/*",
+      "node_modules/**/*",
+      ".env",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "src/renderer/assets",
+        "to": "assets"
+      }
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "src/renderer/assets/icon.ico"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "src/renderer/assets/icon.icns"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "src/renderer/assets/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
   }
 }
